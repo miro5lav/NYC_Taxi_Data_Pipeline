@@ -80,7 +80,7 @@ services:
     command: server --console-address ":9001" /data
 
   postgresql:
-    image: postgres:latest
+    image: postgres:16-alpine
     command: ["postgres", "-c", "wal_level=logical"]
     container_name: dw-postgresql
     healthcheck:

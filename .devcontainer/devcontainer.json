@@ -1,0 +1,34 @@
+{
+  "name": "Miniconda + Java + Maven",
+  "image": "mcr.microsoft.com/devcontainers/miniconda:3",
+
+  // Add Java 21 + Maven on top of the miniconda base
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {},
+    "ghcr.io/devcontainers-extra/features/maven-sdkman:2": {}
+  },
+
+  // After container creation: set up your conda env
+  "postCreateCommand": "conda env create -f environment.yml || echo 'No environment.yml found, skipping'",
+  "postAttachCommand": "conda init bash && source ~/.bashrc",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python / Conda
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        // Java / Maven
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "redhat.java"
+      ],
+      "settings": {
+        // Point Python to your conda env
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        // Java home (sdkman installs it here)
+        "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
